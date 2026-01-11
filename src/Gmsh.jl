@@ -34,6 +34,7 @@ function initialize(argv=String[]; finalize_atexit=true)
     if length(argv) > 0 && startswith(first(argv), "-")
         argv = pushfirst!(copy(argv), "gmsh")
     end
+    ccall(:setlocale, Ptr{UInt8}, (Cint, Ptr{UInt8}), 0, "C")
     gmsh.initialize(argv)
     if finalize_atexit
         atexit(finalize)
